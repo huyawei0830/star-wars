@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Initialize the cache for name to entity mapping for efficient query with name
+ * Query the other attributes with the url assuming they might be subjective to changes anytime
+ */
 @Repository
 public class StarshipRepositoryImpl implements StarshipRepository {
 

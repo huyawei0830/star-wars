@@ -6,6 +6,9 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Some fields were omitted
+ */
 public class Planet implements Serializable {
 
     @Serial

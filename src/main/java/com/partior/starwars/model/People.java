@@ -7,6 +7,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Some fields were omitted
+ */
 public class People implements Serializable {
 
     @Serial
@@ -78,5 +81,5 @@ public class People implements Serializable {
     public int hashCode() {
         return Objects.hash(name, homeworld, starships, url);
     }
-    
+
 }
