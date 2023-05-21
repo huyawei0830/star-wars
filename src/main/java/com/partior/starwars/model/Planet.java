@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Planet implements Serializable {
 
@@ -38,6 +39,19 @@ public class Planet implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Planet planet = (Planet) o;
+        return Objects.equals(name, planet.name) && Objects.equals(url, planet.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, url);
     }
 
 }

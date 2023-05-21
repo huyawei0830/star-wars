@@ -5,6 +5,7 @@ import com.partior.starwars.dto.StarshipDto;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Starship implements Serializable {
 
@@ -79,6 +80,19 @@ public class Starship implements Serializable {
 
     public StarshipDto toDto() {
         return new StarshipDto(name, starshipClass, model);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Starship starship = (Starship) o;
+        return Objects.equals(name, starship.name) && Objects.equals(starshipClass, starship.starshipClass) && Objects.equals(model, starship.model) && Objects.equals(url, starship.url) && Objects.equals(crew, starship.crew);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, starshipClass, model, url, crew);
     }
 
 }

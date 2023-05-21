@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class People implements Serializable {
 
@@ -65,4 +66,17 @@ public class People implements Serializable {
         this.url = url;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        People people = (People) o;
+        return Objects.equals(name, people.name) && Objects.equals(homeworld, people.homeworld) && Objects.equals(starships, people.starships) && Objects.equals(url, people.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, homeworld, starships, url);
+    }
+    
 }
