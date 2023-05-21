@@ -54,7 +54,7 @@ public class StarWarsServiceImpl implements StarWarsService {
         );
     }
 
-    private StarshipDto getStarshipOf(String peopleName) {
+    public StarshipDto getStarshipOf(String peopleName) {
         Optional<People> peopleSnapshot = peopleRepository.getPeopleSnapshotByName(peopleName);
         String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new ResourceNotFoundException(peopleName + " is not found"));
         List<String> starships = peopleRepository.getPeopleByUrl(peopleUrl).getStarships();
@@ -66,14 +66,14 @@ public class StarWarsServiceImpl implements StarWarsService {
         }
     }
 
-    private int getCrewOnStarship(String starshipName) {
+    public int getCrewOnStarship(String starshipName) {
         Optional<Starship> starshipSnapshot = starshipRepository.getStarshipSnapshotByName(starshipName);
         String starshipUrl = starshipSnapshot.map(s -> s.getUrl()).orElseThrow(() -> new ResourceNotFoundException(starshipName + " is not found"));
         Starship starship = starshipRepository.getStarshipByUrl(starshipUrl);
         return ConversionUtil.stringToInt(starship.getCrew());
     }
 
-    private boolean checkIfPeopleOnPlanet(String peopleName, String planetName) {
+    public boolean checkIfPeopleOnPlanet(String peopleName, String planetName) {
         Optional<People> peopleSnapshot = peopleRepository.getPeopleSnapshotByName(peopleName);
         String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new ResourceNotFoundException(peopleName + " is not found"));
         String planetUrl = peopleRepository.getPeopleByUrl(peopleUrl).getHomeworld();

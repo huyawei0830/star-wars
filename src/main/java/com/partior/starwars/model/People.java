@@ -23,6 +23,16 @@ public class People implements Serializable {
     @JsonProperty("url")
     private String url;
 
+    public People() {
+    }
+
+    public People(String name, String homeworld, List<String> starships, String url) {
+        this.name = name;
+        this.homeworld = homeworld;
+        this.starships = starships;
+        this.url = url;
+    }
+
     public String getName() {
         return name;
     }

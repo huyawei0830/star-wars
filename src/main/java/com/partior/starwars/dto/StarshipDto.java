@@ -3,6 +3,8 @@ package com.partior.starwars.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StarshipDto {
 
@@ -46,6 +48,19 @@ public class StarshipDto {
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StarshipDto that = (StarshipDto) o;
+        return Objects.equals(name, that.name) && Objects.equals(starshipClass, that.starshipClass) && Objects.equals(model, that.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, starshipClass, model);
     }
 
 }

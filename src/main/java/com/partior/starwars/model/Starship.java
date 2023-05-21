@@ -26,6 +26,17 @@ public class Starship implements Serializable {
     @JsonProperty("crew")
     private String crew;
 
+    public Starship() {
+    }
+
+    public Starship(String name, String starshipClass, String model, String url, String crew) {
+        this.name = name;
+        this.starshipClass = starshipClass;
+        this.model = model;
+        this.url = url;
+        this.crew = crew;
+    }
+
     public String getName() {
         return name;
     }
