@@ -2,6 +2,7 @@ package com.partior.starwars.service.impl;
 
 import com.partior.starwars.dto.InformationDto;
 import com.partior.starwars.dto.StarshipDto;
+import com.partior.starwars.exception.ResourceNotFoundException;
 import com.partior.starwars.model.People;
 import com.partior.starwars.model.Planet;
 import com.partior.starwars.model.Starship;
@@ -55,7 +56,7 @@ public class StarWarsServiceImpl implements StarWarsService {
 
     private StarshipDto getStarshipOf(String peopleName) {
         Optional<People> peopleSnapshot = peopleRepository.getPeopleSnapshotByName(peopleName);
-        String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new RuntimeException(peopleName + "not found"));
+        String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new ResourceNotFoundException(peopleName + " is not found"));
         List<String> starships = peopleRepository.getPeopleByUrl(peopleUrl).getStarships();
         if (CollectionUtils.isEmpty(starships)) {
             return new StarshipDto();
@@ -67,14 +68,14 @@ public class StarWarsServiceImpl implements StarWarsService {
 
     private int getCrewOnStarship(String starshipName) {
         Optional<Starship> starshipSnapshot = starshipRepository.getStarshipSnapshotByName(starshipName);
-        String starshipUrl = starshipSnapshot.map(s -> s.getUrl()).orElseThrow(() -> new RuntimeException(starshipName + "not found"));
+        String starshipUrl = starshipSnapshot.map(s -> s.getUrl()).orElseThrow(() -> new ResourceNotFoundException(starshipName + " is not found"));
         Starship starship = starshipRepository.getStarshipByUrl(starshipUrl);
         return ConversionUtil.stringToInt(starship.getCrew());
     }
 
     private boolean checkIfPeopleOnPlanet(String peopleName, String planetName) {
         Optional<People> peopleSnapshot = peopleRepository.getPeopleSnapshotByName(peopleName);
-        String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new RuntimeException(peopleName + "not found"));
+        String peopleUrl = peopleSnapshot.map(d -> d.getUrl()).orElseThrow(() -> new ResourceNotFoundException(peopleName + " is not found"));
         String planetUrl = peopleRepository.getPeopleByUrl(peopleUrl).getHomeworld();
         Planet planet = planetRepository.getPlanetByUrl(planetUrl);
         return planetName.equals(planet.getName());
